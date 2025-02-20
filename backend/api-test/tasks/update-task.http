@@ -1,0 +1,10 @@
+PUT http://localhost:8080/api/task/1
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+  "title": "Updated task",
+  "assigned_to_id": 1,
+  "due_date": "2024-02-21T14:30:00Z",
+  "status": "completed"
+}
