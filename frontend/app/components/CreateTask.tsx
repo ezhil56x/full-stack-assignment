@@ -236,6 +236,7 @@ function CreateTask() {
                     due_date: dueDate?.toISOString() || null,
                   });
                   clearFields();
+                  window.location.reload();
                 } else {
                   toast({ description: "Please fill in all fields" });
                 }

@@ -2,8 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
+import { ArrowUpDown, Pencil, Trash } from "lucide-react";
 
 export type Task = {
   id: number;
@@ -21,6 +20,7 @@ import PriorityCell from "../components/cells/PriorityCell";
 import StatusCell from "../components/cells/StatusCell";
 import AssignedCell from "../components/cells/AssignedToCell";
 import DueDateCell from "../components/cells/DueDateCell";
+import ActionsCell from "../components/cells/ActionsCell";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -104,5 +104,10 @@ export const columns: ColumnDef<Task>[] = [
         </Button>
       );
     },
+  },
+  {
+    accessorKey: "actions",
+    header: "Actions",
+    cell: ({ row }) => <ActionsCell row={row} />,
   },
 ];
