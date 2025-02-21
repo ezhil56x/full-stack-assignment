@@ -5,6 +5,8 @@ import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
 import NavBar, { ModeToggle } from "./components/NavBar";
 
+import { Toaster } from "@/components/ui/toaster";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -39,6 +41,7 @@ export default function RootLayout({
         >
           <NavBar />
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
