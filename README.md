@@ -54,7 +54,7 @@ docker run --name postgres-container -e POSTGRES_USER=postgres -e POSTGRES_PASSW
 
 ## API Routes
 
-## Auth
+### Auth
 
 - POST /auth/login
 - POST /auth/login
