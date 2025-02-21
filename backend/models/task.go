@@ -15,6 +15,7 @@ type Task struct {
 	AssignedToID *uint      `json:"assigned_to_id,omitempty"`
 	AssignedTo   *User      `json:"assigned_to,omitempty" gorm:"foreignKey:AssignedToID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 	Status       string     `json:"status"`
+	Priority     string     `json:"priority"`
 	DueDate      *time.Time `json:"due_date"`
 }
 
@@ -25,6 +26,7 @@ type SafeTask struct {
 	AssignedToID *uint      `json:"assigned_to_id,omitempty"`
 	AssignedTo   *SafeUser  `json:"assigned_to,omitempty"`
 	Status       string     `json:"status"`
+	Priority     string     `json:"priority"`
 	DueDate      *time.Time `json:"due_date,omitempty"`
 	CreatedAt    time.Time  `json:"created_at"`
 	UpdatedAt    time.Time  `json:"updated_at"`
@@ -37,6 +39,7 @@ func (e *Task) CreateTask() (*SafeTask, error) {
 		Description:  e.Description,
 		AssignedToID: e.AssignedToID,
 		Status:       e.Status,
+		Priority:     e.Priority,
 		DueDate:      e.DueDate,
 	}
 
@@ -122,6 +125,7 @@ func (t *Task) ToSafeTask() *SafeTask {
 		AssignedToID: t.AssignedToID,
 		AssignedTo:   safeUser,
 		Status:       t.Status,
+		Priority:     t.Priority,
 		DueDate:      t.DueDate,
 		CreatedAt:    t.CreatedAt,
 		UpdatedAt:    t.UpdatedAt,

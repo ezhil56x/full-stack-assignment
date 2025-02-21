@@ -21,4 +21,5 @@ func RegisterRoutes(server *gin.Engine) {
 	authenticated.DELETE("/task/:id", deleteTask)
 	
 	authenticated.GET("/user/:id", getUserProfile)
+	authenticated.GET("/users", getAllUsers)
 }

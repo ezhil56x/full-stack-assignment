@@ -80,3 +80,22 @@ func AuthenticateUser(email, password string) (*User, error) {
 
 	return user, nil
 }
+
+func GetAllUsers() ([]SafeUser, error) {
+	var users []User
+	result := db.DB.Find(&users)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	var safeUsers []SafeUser
+	for _, user := range users {
+		safeUser := SafeUser{
+			ID:       user.ID,
+			Username: user.Username,
+			Email:    user.Email,
+		}
+		safeUsers = append(safeUsers, safeUser)
+	}
+	return safeUsers, nil
+}

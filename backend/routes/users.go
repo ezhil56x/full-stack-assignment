@@ -72,3 +72,19 @@ func getUserProfile(context *gin.Context) {
 
 	context.JSON(http.StatusOK, gin.H{"user": user})
 }
+
+func getAllUsers(context *gin.Context) {
+	_, exists := context.Get("userID")
+	if !exists {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized."})
+		return
+	}
+
+	users, err := models.GetAllUsers()
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not fetch users."})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"users": users})
+}
