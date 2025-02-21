@@ -2,11 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, UserCircle } from "lucide-react";
-import { useState } from "react";
+import { ArrowUpDown } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export type Task = {
-  id: string;
+  id: number;
   title: string;
   description: string;
   assignedTo: string;
@@ -25,7 +25,17 @@ import DueDateCell from "../components/cells/DueDateCell";
 export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: "id",
-    header: "ID",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Id
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "title",
@@ -60,7 +70,7 @@ export const columns: ColumnDef<Task>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Duedate
+          Due date
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

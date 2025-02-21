@@ -58,7 +58,7 @@ function Dashboard() {
 
   function transformTasks(data) {
     return data.tasks.map((task) => ({
-      id: task.id.toString(),
+      id: Number(task.id),
       title: capFirstLetter(task.title),
       description: capFirstLetter(task.description),
       assignedTo: capFirstLetter(task.assigned_to.username),
