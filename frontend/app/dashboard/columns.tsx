@@ -17,14 +17,16 @@ export type Task = {
   updateAt: string;
 };
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import PriorityCell from "../components/cells/PriorityCell";
+import StatusCell from "../components/cells/StatusCell";
+import AssignedCell from "../components/cells/AssignedToCell";
+import DueDateCell from "../components/cells/DueDateCell";
 
 export const columns: ColumnDef<Task>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
   {
     accessorKey: "title",
     header: "Title",
@@ -36,79 +38,18 @@ export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: "assignedTo",
     header: "Assigned To",
-    cell: ({ row }) => (
-      <div className="flex items-center space-x-2">
-        <UserCircle className="h-5 w-5 text-gray-500" />
-        <span>{row.getValue("assignedTo")}</span>
-      </div>
-    ),
+    cell: ({ row }) => <AssignedCell row={row} />,
   },
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => {
-      const initialStatus = row.getValue("status") || "Pending"; // Default to "Pending"
-      const [status, setStatus] = useState(initialStatus);
-
-      const handleStatusChange = (newStatus: string) => {
-        setStatus(newStatus);
-        // Here, you can also update the data source or send an API request
-      };
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="capitalize">
-              {status}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {["Pending", "Completed", "In Progress"].map((option) => (
-              <DropdownMenuItem
-                key={option}
-                onClick={() => handleStatusChange(option)}
-              >
-                {option}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    cell: ({ row }) => <StatusCell row={row} />,
   },
 
   {
     accessorKey: "priority",
     header: "Priority",
-    cell: ({ row }) => {
-      const initialPriority = row.getValue("priority") || "Low";
-      const [priority, setPriority] = useState(initialPriority);
-
-      const handlePriorityChange = (newPriority: string) => {
-        setPriority(newPriority);
-        // Here, you can also update the data source or send an API request
-      };
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="capitalize">
-              {priority}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {["Low", "Medium", "High"].map((option) => (
-              <DropdownMenuItem
-                key={option}
-                onClick={() => handlePriorityChange(option)}
-              >
-                {option}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    cell: ({ row }) => <PriorityCell row={row} />,
   },
 
   {
@@ -124,6 +65,7 @@ export const columns: ColumnDef<Task>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => <DueDateCell row={row} />,
   },
   {
     accessorKey: "createdAt",

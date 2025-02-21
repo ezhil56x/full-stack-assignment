@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 import { DataTable } from "./data-table";
-import { formatDate, capFirstLetter } from "@/lib/utils";
+import { formatDateAndTime, formatDate, capFirstLetter } from "@/lib/utils";
 
 import { columns, Task } from "./columns";
 
@@ -65,8 +65,8 @@ function Dashboard() {
       status: capFirstLetter(task.status),
       priority: capFirstLetter(task.priority),
       dueDate: formatDate(task.due_date),
-      createdAt: formatDate(task.created_at),
-      updateAt: formatDate(task.updated_at),
+      createdAt: formatDateAndTime(task.created_at),
+      updateAt: formatDateAndTime(task.updated_at),
     }));
   }
 
