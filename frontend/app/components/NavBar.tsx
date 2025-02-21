@@ -4,6 +4,7 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useRouter, usePathname } from "next/navigation";
 
 import {
   DropdownMenu,
@@ -14,6 +15,9 @@ import {
 
 function NavBar() {
   const { setTheme } = useTheme();
+  const token = localStorage.getItem("token");
+  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <div>
@@ -36,6 +40,34 @@ function NavBar() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          {pathname !== "/login" &&
+            (token ? (
+              <Button
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  router.push("/login");
+                }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  router.push("/login");
+                }}
+              >
+                Login
+              </Button>
+            ))}
+          {pathname === "/login" && (
+            <Button
+              onClick={() => {
+                router.push("/");
+              }}
+            >
+              Home
+            </Button>
+          )}
         </div>
       </nav>
       <div className="pt-16"></div>
