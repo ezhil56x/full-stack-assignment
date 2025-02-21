@@ -44,6 +44,20 @@ go mod download
 go run main.go
 ```
 
+### Dockerize the backend
+
+1. Build the docker image
+
+```bash
+docker build -t taskmanager .
+```
+
+2. Run the docker container
+
+```bash
+docker run -p 8080:8080 taskmanager
+```
+
 ## Database
 
 1. Run the following command to start a PostgreSQL container
